@@ -4,275 +4,410 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Little Hill Services - Computer Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rye&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #ffffff;
-            overflow-x: hidden;
+            font-family: 'Playfair Display', serif;
+            background-color: #d4b896;
+            background-image:
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.03) 2px,
+                    rgba(139, 69, 19, 0.03) 4px
+                ),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(139, 69, 19, 0.03) 2px,
+                    rgba(139, 69, 19, 0.03) 4px
+                ),
+                radial-gradient(ellipse at center, #e8d7c3 0%, #d4b896 50%, #c9a876 100%);
+            color: #2c1810;
+            min-height: 100vh;
+            position: relative;
+            padding: 20px;
         }
-        
-        .neon-frame {
-            border: 2px solid #00ffff;
-            border-radius: 15px;
-            box-shadow: 
-                0 0 10px #00ffff,
-                inset 0 0 10px rgba(0, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            background: rgba(0, 0, 0, 0.3);
-            margin: 20px;
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(101, 67, 33, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(160, 82, 45, 0.08) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .poster-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #f4e8d0;
+            border: 20px solid #2c1810;
+            box-shadow:
+                0 0 60px rgba(0, 0, 0, 0.5),
+                inset 0 0 40px rgba(139, 69, 19, 0.2);
+            position: relative;
+            padding: 40px;
+            transform: rotate(-0.5deg);
+            z-index: 2;
+        }
+
+        .poster-container::before,
+        .poster-container::after {
+            content: "";
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #8B4513;
+            border-radius: 50%;
+            box-shadow: inset -3px -3px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .poster-container::before {
+            top: -15px;
+            left: -15px;
+        }
+
+        .poster-container::after {
+            top: -15px;
+            right: -15px;
+        }
+
+        .ornament-border {
+            border: 3px solid #2c1810;
             padding: 30px;
             position: relative;
-            transition: all 0.3s ease;
+            background: linear-gradient(45deg, transparent 48%, rgba(139, 69, 19, 0.05) 50%, transparent 52%);
         }
-        
-        .neon-frame:hover {
-            box-shadow: 
-                0 0 20px #00ffff,
-                inset 0 0 15px rgba(0, 255, 255, 0.2);
-            transform: translateY(-2px);
+
+        .ornament-border::before,
+        .ornament-border::after {
+            content: "★ ★ ★";
+            position: absolute;
+            font-size: 24px;
+            color: #2c1810;
+            left: 50%;
+            transform: translateX(-50%);
         }
-        
+
+        .ornament-border::before {
+            top: 10px;
+        }
+
+        .ornament-border::after {
+            bottom: 10px;
+        }
+
         header {
             text-align: center;
-            padding: 60px 20px;
+            margin-bottom: 30px;
+            padding-top: 20px;
         }
-        
-        .logo {
-            font-size: 3.5rem;
-            font-weight: bold;
-            text-shadow: 0 0 30px #00ffff;
+
+        .wanted-label {
+            font-family: 'Rye', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: #2c1810;
+            text-shadow:
+                3px 3px 0 rgba(139, 69, 19, 0.3),
+                6px 6px 10px rgba(0, 0, 0, 0.2);
             margin-bottom: 10px;
-            animation: glow 2s ease-in-out infinite alternate;
+            transform: perspective(300px) rotateY(-2deg);
         }
-        
-        @keyframes glow {
-            from { text-shadow: 0 0 20px #00ffff; }
-            to { text-shadow: 0 0 40px #00ffff, 0 0 60px #00ffff; }
+
+        .company-name {
+            font-family: 'Rye', serif;
+            font-size: 2.5rem;
+            color: #8B4513;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin: 20px 0;
+            letter-spacing: 0.05em;
         }
-        
+
         .tagline {
-            font-size: 1.3rem;
-            color: #ff00ff;
+            font-size: 1.1rem;
             font-style: italic;
-            text-shadow: 
-                0 0 5px #ff00ff,
-                0 0 10px #ff00ff,
-                0 0 15px #ff00ff,
-                0 0 20px #ff00ff;
-            animation: neonFlicker 3s ease-in-out infinite alternate;
+            color: #5a3a2a;
+            margin: 15px 0;
+            letter-spacing: 0.05em;
         }
-        
-        @keyframes neonFlicker {
-            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-                text-shadow: 
-                    0 0 5px #ff00ff,
-                    0 0 10px #ff00ff,
-                    0 0 15px #ff00ff,
-                    0 0 20px #ff00ff;
-            }
-            20%, 24%, 55% {
-                text-shadow: 
-                    0 0 2px #ff00ff,
-                    0 0 5px #ff00ff,
-                    0 0 8px #ff00ff,
-                    0 0 12px #ff00ff;
-            }
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
-        }
-        
-        .service-card {
-            border: 2px solid #ff00ff;
-            border-radius: 15px;
-            box-shadow: 
-                0 0 15px #ff00ff,
-                inset 0 0 10px rgba(255, 0, 255, 0.1);
-            background: rgba(0, 0, 0, 0.4);
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-        
-        .service-card:hover {
-            box-shadow: 
-                0 0 25px #ff00ff,
-                inset 0 0 15px rgba(255, 0, 255, 0.2);
-            transform: scale(1.02);
-        }
-        
-        .service-card h3 {
-            color: #ff00ff;
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            text-shadow: 0 0 10px #ff00ff;
-        }
-        
-        .about-section {
-            border-color: #ffff00;
-            box-shadow: 
-                0 0 15px #ffff00,
-                inset 0 0 10px rgba(255, 255, 0, 0.1);
-        }
-        
-        .about-section:hover {
-            box-shadow: 
-                0 0 25px #ffff00,
-                inset 0 0 15px rgba(255, 255, 0, 0.2);
-        }
-        
-        .contact-section {
-            border-color: #00ff00;
-            box-shadow: 
-                0 0 15px #00ff00,
-                inset 0 0 10px rgba(0, 255, 0, 0.1);
-        }
-        
-        .contact-section:hover {
-            box-shadow: 
-                0 0 25px #00ff00,
-                inset 0 0 15px rgba(0, 255, 0, 0.2);
-        }
-        
-        .section-title {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .cyan-title { color: #00ffff; text-shadow: 0 0 15px #00ffff; }
-        .yellow-title { color: #ffff00; text-shadow: 0 0 15px #ffff00; }
-        .green-title { color: #00ff00; text-shadow: 0 0 15px #00ff00; }
-        
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .contact-item {
-            background: rgba(0, 255, 0, 0.1);
+
+        .reward-banner {
+            background: #2c1810;
+            color: #f4e8d0;
             padding: 15px;
-            border-radius: 10px;
+            margin: 20px -30px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 0.1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .reward-banner::before,
+        .reward-banner::after {
+            content: "$";
+            font-size: 1.5rem;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .reward-banner::before {
+            left: 20px;
+        }
+
+        .reward-banner::after {
+            right: 20px;
+        }
+
+        .services-section {
+            margin: 30px 0;
+        }
+
+        .section-title {
+            font-family: 'Rye', serif;
+            font-size: 1.8rem;
+            text-align: center;
+            color: #2c1810;
+            margin: 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+
+        .section-title::before,
+        .section-title::after {
+            content: "—";
+            margin: 0 15px;
+        }
+
+        .services-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .services-list li {
+            background: rgba(139, 69, 19, 0.05);
+            border: 2px solid #8B4513;
+            border-radius: 3px;
+            padding: 15px;
+            margin: 15px 0;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .services-list li::before {
+            content: "☞";
+            position: absolute;
+            left: 15px;
+            font-size: 1.5rem;
+            color: #8B4513;
+        }
+
+        .services-list h3 {
+            font-family: 'Rye', serif;
+            font-size: 1.3rem;
+            color: #5a3a2a;
+            margin-bottom: 8px;
+        }
+
+        .services-list p {
+            line-height: 1.6;
+            color: #3a2818;
+        }
+
+        .about-section {
+            background: rgba(255, 248, 220, 0.5);
+            border: 2px dashed #8B4513;
+            padding: 20px;
+            margin: 30px 0;
             text-align: center;
         }
-        
-        .btn {
+
+        .about-section p {
+            line-height: 1.8;
+            margin: 10px 0;
+            font-size: 1.05rem;
+        }
+
+        .contact-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #2c1810;
+            color: #f4e8d0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .contact-item {
+            padding: 10px;
+        }
+
+        .contact-item h4 {
+            font-family: 'Rye', serif;
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: #d4b896;
+        }
+
+        .btn-telegram {
             display: inline-block;
+            background: #8B4513;
+            color: #f4e8d0;
             padding: 12px 30px;
-            background: transparent;
-            border: 2px solid #00ffff;
-            color: #00ffff;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            margin: 10px;
+            font-family: 'Rye', serif;
+            font-size: 1.1rem;
+            margin: 20px 0;
+            border: 3px solid #5a3a2a;
+            box-shadow: 3px 3px 0 #2c1810;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
-        
-        .btn:hover {
-            background: #00ffff;
-            color: #000000;
-            box-shadow: 0 0 20px #00ffff;
-            transform: translateY(-2px);
+
+        .btn-telegram:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #2c1810;
         }
-        
+
         footer {
             text-align: center;
-            padding: 40px;
-            color: #666666;
             margin-top: 40px;
+            padding: 20px;
+            font-size: 0.9rem;
+            color: #5a3a2a;
+            border-top: 2px solid #8B4513;
         }
-        
+
+        .decorative-text {
+            font-family: 'Rye', serif;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            color: #5a3a2a;
+            letter-spacing: 0.15em;
+        }
+
         @media (max-width: 768px) {
-            .logo { font-size: 2.5rem; }
-            .tagline { font-size: 1.1rem; }
-            .neon-frame { margin: 10px; padding: 20px; }
-            .services-grid { grid-template-columns: 1fr; }
+            .poster-container {
+                padding: 20px;
+                border-width: 10px;
+            }
+            .wanted-label {
+                font-size: 2.5rem;
+            }
+            .company-name {
+                font-size: 1.8rem;
+            }
+            .ornament-border {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="logo">Little Hill Services</div>
-        <div class="tagline">
-            <span>B</span><span>i</span><span>g</span><span> </span><span>r</span><span>e</span><span>s</span><span>u</span><span>l</span><span>t</span><span>s</span><span>,</span><span> </span><span>w</span><span>i</span><span>t</span><span>h</span><span> </span><span>s</span><span>m</span><span>a</span><span>l</span><span>l</span><span> </span><span>c</span><span>o</span><span>m</span><span>p</span><span>a</span><span>n</span><span>y</span><span> </span><span>r</span><span>e</span><span>s</span><span>p</span><span>o</span><span>n</span><span>s</span><span>i</span><span>v</span><span>e</span><span>n</span><span>e</span><span>s</span><span>s</span>
-        </div>
-    </header>
+    <div class="poster-container">
+        <div class="ornament-border">
+            <header>
+                <div class="wanted-label">WANTED</div>
+                <div class="company-name">Little Hill Services</div>
+                <div class="tagline">For Exceptional Computer Consulting</div>
+            </header>
 
-    <div class="container">
-        <div class="neon-frame">
-            <h2 class="section-title cyan-title">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>IT Infrastructure</h3>
-                    <p>Complete network design, server setup, and infrastructure management. We build scalable solutions that grow with your business needs.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Cloud Migration</h3>
-                    <p>Seamless transition to cloud platforms with minimal downtime. Expert guidance through AWS, Azure, and Google Cloud implementations.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Cybersecurity</h3>
-                    <p>Comprehensive security audits, threat assessment, and implementation of robust protection systems to safeguard your digital assets.</p>
-                </div>
-                <div class="service-card">
-                    <h3>System Optimization</h3>
-                    <p>Performance tuning, database optimization, and workflow automation to maximize efficiency and reduce operational costs.</p>
-                </div>
+            <div class="reward-banner">
+                REWARD: SUPERIOR IT SOLUTIONS
             </div>
-            <div style="text-align: center;">
-                <a href="#contact" class="btn">Get Started Today</a>
-            </div>
-        </div>
 
-        <div class="neon-frame about-section">
-            <h2 class="section-title yellow-title">Why Choose Little Hill?</h2>
-            <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-                We combine enterprise-level expertise with the agility and personal attention of a boutique consultancy. Our team delivers cutting-edge solutions without the bureaucracy and overhead of large firms.
-            </p>
-            <p style="font-size: 1.1rem; line-height: 1.8;">
-                Every client receives direct access to senior consultants, custom-tailored solutions, and rapid response times. We understand that technology challenges require immediate attention and innovative thinking.
-            </p>
-        </div>
-
-        <div class="neon-frame contact-section" id="contact">
-            <h2 class="section-title green-title">Get In Touch</h2>
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">
-                Ready to transform your technology infrastructure? Let's discuss your project.
-            </p>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h4>Email</h4>
-                    <p>info@littlehillservices.com</p>
-                </div>
-                <div class="contact-item">
-                    <h4>Response Time</h4>
-                    <p>Within 24 hours</p>
-                </div>
+            <div class="services-section">
+                <h2 class="section-title">Known Specialties</h2>
+                <ul class="services-list">
+                    <li>
+                        <h3>IT Infrastructure</h3>
+                        <p>Complete network design, server setup, and infrastructure management. Building scalable solutions that grow with your enterprise.</p>
+                    </li>
+                    <li>
+                        <h3>Cloud Migration</h3>
+                        <p>Seamless transition to cloud platforms with minimal downtime. Expert guidance through AWS, Azure, and Google Cloud territories.</p>
+                    </li>
+                    <li>
+                        <h3>Cybersecurity</h3>
+                        <p>Comprehensive security audits, threat assessment, and implementation of robust protection systems to safeguard your digital assets.</p>
+                    </li>
+                    <li>
+                        <h3>System Optimization</h3>
+                        <p>Performance tuning, database optimization, and workflow automation to maximize efficiency and reduce operational costs.</p>
+                    </li>
+                </ul>
             </div>
+
+            <div class="decorative-text">
+                ◆ ◇ ◆ ESTABLISHED 2025 ◆ ◇ ◆
+            </div>
+
+            <div class="about-section">
+                <h2 class="section-title">Distinguishing Marks</h2>
+                <p>
+                    <strong>Big results, with small company responsiveness.</strong>
+                </p>
+                <p>
+                    Enterprise-level expertise with the agility and personal attention of a boutique consultancy. Direct access to senior consultants, custom-tailored solutions, and rapid response times.
+                </p>
+                <p>
+                    Technology challenges require immediate attention and innovative thinking.
+                </p>
+            </div>
+
+            <div class="contact-section" id="contact">
+                <h2 class="section-title" style="color: #d4b896;">Last Seen At</h2>
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <h4>Telegraph</h4>
+                        <p>info@littlehillservices.com</p>
+                    </div>
+                    <div class="contact-item">
+                        <h4>Response Time</h4>
+                        <p>Within 24 hours</p>
+                    </div>
+                </div>
+                <a href="#contact" class="btn-telegram">Send Telegram</a>
+            </div>
+
+            <div class="decorative-text">
+                DEAD OR ALIVE (PREFERABLY ALIVE)
+            </div>
+
+            <footer>
+                <p>© Anno Domini 2025 • Little Hill Services • All Rights Reserved</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">This notice authorized by the Technology Marshal</p>
+            </footer>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2025 Little Hill Services. All rights reserved.</p>
-    </footer>
 </body>
 </html>
